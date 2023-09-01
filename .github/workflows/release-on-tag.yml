@@ -3,6 +3,8 @@ on:
   push:
     branches:
         - 'main'
+    tags:
+        - 'v*'
 
 jobs:
   release:
@@ -18,8 +20,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: test2
-        release_name: Release name
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
         body: |
           Changes in this Release
           - First Change
