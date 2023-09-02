@@ -1,0 +1,21 @@
+# create tag github actions
+on:
+    push:
+      branches:
+        - main
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+  
+      steps:
+        - name: Code Checkout
+          uses: actions/checkout@v3
+  
+        - name: 差分を push
+          run: |
+            git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+            git config --global user.name "${GITHUB_ACTOR}"
+            git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+            git tag v0.0.7
+            git push origin v0.0.7
