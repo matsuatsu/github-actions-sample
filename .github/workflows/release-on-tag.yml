@@ -20,14 +20,18 @@ jobs:
     - run: npm run build 
     - run: cd dist && zip -r dist.zip ./* 
 
+    - name: step1
+      run: |
+        echo "TAG_NAME=$(TZ='Asia/Tokyo' date +'%Y.%m.%dT%H:%M')" >> $GITHUB_ENV
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: 2022.1.1
-        release_name: Release 2022.1.1
+        tag_name: ${{ env.TAG_NAME }}
+        release_name: Release ${{ env.TAG_NAME }}
         body: |
           Changes in this Release
           - First Change
