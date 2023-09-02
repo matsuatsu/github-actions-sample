@@ -1,8 +1,8 @@
 name: Release on Tag
 on:
   push:
-    tags:
-        - 'v*'
+    branches:
+        - main
 
 jobs:
   release:
@@ -26,8 +26,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: 2022.1.1
+        release_name: Release 2022.1.1
         body: |
           Changes in this Release
           - First Change
